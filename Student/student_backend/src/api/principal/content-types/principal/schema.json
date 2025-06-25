@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "principals",
+  "info": {
+    "singularName": "principal",
+    "pluralName": "principals",
+    "displayName": "Principal"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "principal"
+    },
+    "principal_name": {
+      "type": "string"
+    },
+    "principal_email": {
+      "type": "email",
+      "required": true
+    }
+  }
+}

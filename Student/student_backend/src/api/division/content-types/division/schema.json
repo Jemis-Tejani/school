@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "divisions",
+  "info": {
+    "singularName": "division",
+    "pluralName": "divisions",
+    "displayName": "Division"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "division_name": {
+      "type": "string",
+      "required": true
+    },
+    "students": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::student.student",
+      "mappedBy": "division"
+    },
+    "standards": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::standard.standard",
+      "inversedBy": "divisions"
+    }
+  }
+}

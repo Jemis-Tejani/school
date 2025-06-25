@@ -1,0 +1,170 @@
+/* Apply global box-sizing (recommended for consistency) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 🔐 Login Container */
+.login-container {
+  height: 100vh;
+  display: flex;
+  background: linear-gradient(135deg, #e0e7ff, #f4f4f8);
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI", sans-serif;
+  padding: 1rem;
+}
+
+/* 📦 Login Card */
+.login-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  max-width: 420px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* 🔠 Heading */
+.login-heading {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #222;
+}
+
+/* 📝 Input Group */
+.login-input-group {
+  margin-bottom: 1.3rem;
+}
+
+/* 🏷️ Label */
+.login-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* ✏️ Input Fields */
+.login-input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: all 0.2s ease-in-out;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #0056d2;
+  box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.2);
+  background-color: #fff;
+}
+
+.input-error {
+  border-color: #ff4d4f !important;
+}
+
+/* ❌ Field Error Message */
+.field-error {
+  color: #ff4d4f;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+/* ⚠️ Login Error Banner */
+.login-error {
+  color: #ff4d4f;
+  background-color: #ffeef0;
+  padding: 0.65rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  border-left: 4px solid #ff4d4f;
+}
+
+/* ✅ Login Button */
+.login-button {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: #0056d2;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 0.8rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-button:hover {
+  background-color: #0047bb;
+  transform: scale(1.02);
+}
+
+.login-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* 👁️ Show Password Toggle */
+.show-password-toggle {
+  margin-top: 0.3rem;
+  text-align: right;
+}
+
+.show-password-toggle button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.show-password-toggle button:hover {
+  text-decoration: underline;
+}
+
+.show-password-toggle button:focus {
+  outline: none;
+  color: #0056d2;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 0.5rem;
+  }
+
+  .login-card {
+    padding: 1.8rem;
+    max-width: 95%;
+  }
+
+  .login-heading {
+    font-size: 1.3rem;
+  }
+
+  .login-button {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+}

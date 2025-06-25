@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "students",
+  "info": {
+    "singularName": "student",
+    "pluralName": "students",
+    "displayName": "Student"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "student_name": {
+      "type": "string",
+      "required": true
+    },
+    "subjects": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::subject.subject",
+      "mappedBy": "students"
+    },
+    "division": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::division.division",
+      "inversedBy": "students"
+    },
+    "student_roll_number": {
+      "type": "integer",
+      "required": true
+    },
+    "standard": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::standard.standard",
+      "inversedBy": "students"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "student"
+    },
+    "student_email": {
+      "type": "email",
+      "required": true
+    }
+  }
+}
