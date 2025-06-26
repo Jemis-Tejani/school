@@ -72,10 +72,6 @@ const StudentDashboard = () => {
   if (error) return <p className="error-text">{error}</p>;
   if (!student) return <p>No student data found.</p>;
 
-  const division = student?.division?.division_name ?? "-";
-  const standard = student?.standard?.standard_name ?? "-";
-  const subjects = Array.isArray(student?.subjects) ? student.subjects : [];
-
   return (
     <div className="student-container">
       <h1 className="student-heading">
@@ -85,25 +81,29 @@ const StudentDashboard = () => {
 
       <InfoCard title="Student Info" icon="👤">
         <Table
-          columns={["Name", "Email", "Standard", "Division"]}
+          columns={["Name", "Email", "Roll Number", "User ID"]}
           rows={[
             [
-              student?.username ?? "-",
-              student?.email ?? "-",
-              standard,
-              division,
+              student?.student?.student_name ?? "-",
+              student?.student?.student_email ?? "-",
+              student?.student?.student_roll_number ?? "-",
+              student?.id ?? "-",
             ],
           ]}
         />
       </InfoCard>
 
-      <InfoCard title="Subjects Enrolled" icon="📘">
+      {/* Teacher Info Card */}
+      <InfoCard title="Assigned Teacher" icon="🧑‍🏫">
         <Table
-          columns={["Subject", "Teacher"]}
-          rows={subjects.map((sub) => [
-            sub.subject_name ?? "-",
-            sub.teacher?.teacher_name ?? "Unknown",
-          ])}
+          columns={["Name", "Email", "ID"]}
+          rows={[
+            [
+              student?.teacher?.teacher_name ?? "-",
+              student?.teacher?.teacher_email ?? "-",
+              student?.teacher?.id ?? "-",
+            ],
+          ]}
         />
       </InfoCard>
     </div>

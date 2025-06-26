@@ -84,13 +84,21 @@ const TeacherDashboard = () => {
       </h1>
       <p className="teacher-subtext">This is your personalized dashboard.</p>
 
+      {/* Teacher Info */}
       <InfoCard title="Teacher Info" icon="👤">
         <Table
-          columns={["Name", "Email"]}
-          rows={[[teacher?.username ?? "-", teacher?.email ?? "-"]]}
+          columns={["Name", "Email", "User ID"]}
+          rows={[
+            [
+              teacher?.teacher?.teacher_name ?? teacher?.username ?? "-",
+              teacher?.teacher?.teacher_email ?? teacher?.email ?? "-",
+              teacher?.id ?? "-",
+            ],
+          ]}
         />
       </InfoCard>
 
+      {/* Subjects Section (Optional Placeholder) */}
       <InfoCard title="Subjects You Teach" icon="📘">
         <Table
           columns={["Subject", "Standard", "Division"]}
