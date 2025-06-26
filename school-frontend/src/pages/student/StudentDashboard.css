@@ -1,7 +1,8 @@
-/* src/pages/StudentDashboard.css */
 .student-container {
-  padding: 2rem;
-  font-family: "Segoe UI", sans-serif;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .student-heading {
@@ -12,7 +13,7 @@
 
 .student-subtext {
   color: #555;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .loading-text {
@@ -32,26 +33,46 @@
   margin: 2rem auto;
 }
 
-.info-section {
-  margin-bottom: 2rem;
-  background: #f4f8fb;
-  padding: 1rem;
+.info-card {
+  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background: #f4f8fb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-.info-section h2 {
+.info-title {
   font-size: 1.2rem;
-  color: #34495e;
   margin-bottom: 0.75rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
+  color: #34495e;
 }
 
-.info-section p,
-.info-section li {
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.75rem;
   font-size: 0.95rem;
-  color: #333;
 }
 
-.info-section ul {
-  padding-left: 1.2rem;
+.info-table th,
+.info-table td {
+  border: 1px solid #ddd;
+  padding: 0.6rem;
+  text-align: left;
+}
+
+.info-table th {
+  background-color: #e8f1f5;
+  color: #2c3e50;
+}
+
+.info-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.info-table tr:hover {
+  background-color: #eef6fb;
 }

@@ -1,20 +1,61 @@
-// src/pages/StudentDashboard.jsx
 import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import "./StudentDashboard.css";
 
+const InfoCard = ({ title, icon, children }) => (
+  <div className="info-card">
+    <h3 className="info-title">
+      {icon} {title}
+    </h3>
+    {children}
+  </div>
+);
+
+const Table = ({ columns = [], rows = [] }) => {
+  if (!Array.isArray(columns) || !Array.isArray(rows)) return null;
+
+  return (
+    <div className="table-wrapper">
+      <table className="info-table">
+        <thead>
+          <tr>
+            {columns.map((col, i) => (
+              <th key={i}>{col}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.length > 0 ? (
+            rows.map((row, i) => (
+              <tr key={i}>
+                {row.map((cell, j) => (
+                  <td key={j}>{cell}</td>
+                ))}
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={columns.length} style={{ textAlign: "center" }}>
+                No data found.
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
 const StudentDashboard = () => {
-  const [student, setStudent] = useState([]); // Initialize as null
+  const [student, setStudent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchStudent = async () => {
       try {
-        const studentRes = await axios.get(
-          `http://localhost:1337/api/users/me`
-        );
-        setStudent(studentRes?.data); // Data is in studentRes.data
+        const studentRes = await axios.get("/users/me?populate=*");
+        setStudent(studentRes?.data);
       } catch (err) {
         console.error("Error fetching student:", err);
         setError("Failed to load student data.");
@@ -31,6 +72,10 @@ const StudentDashboard = () => {
   if (error) return <p className="error-text">{error}</p>;
   if (!student) return <p>No student data found.</p>;
 
+  const division = student?.division?.division_name ?? "-";
+  const standard = student?.standard?.standard_name ?? "-";
+  const subjects = Array.isArray(student?.subjects) ? student.subjects : [];
+
   return (
     <div className="student-container">
       <h1 className="student-heading">
@@ -38,25 +83,29 @@ const StudentDashboard = () => {
       </h1>
       <p className="student-subtext">Here's your academic info:</p>
 
-      <div className="info-section">
-        <h2>👤 {student?.username ?? "-"}</h2>
-        {/* Access email directly from student object */}
-        <p>
-          <strong>Email:</strong> {student.email}
-        </p>
-        {/* Division needs to be implemented separately */}
-        <p>
-          <strong>Division:</strong> Not Implemented
-        </p>
-      </div>
+      <InfoCard title="Student Info" icon="👤">
+        <Table
+          columns={["Name", "Email", "Standard", "Division"]}
+          rows={[
+            [
+              student?.username ?? "-",
+              student?.email ?? "-",
+              standard,
+              division,
+            ],
+          ]}
+        />
+      </InfoCard>
 
-      <div className="info-section">
-        <h2>📘 Subjects You're Enrolled In</h2>
-        {/* Subjects needs to be implemented separately */}
-        <ul>
-          <li>Subject data not implemented</li>
-        </ul>
-      </div>
+      <InfoCard title="Subjects Enrolled" icon="📘">
+        <Table
+          columns={["Subject", "Teacher"]}
+          rows={subjects.map((sub) => [
+            sub.subject_name ?? "-",
+            sub.teacher?.teacher_name ?? "Unknown",
+          ])}
+        />
+      </InfoCard>
     </div>
   );
 };
