@@ -100,7 +100,7 @@ const StudentDashboard = () => {
     );
 
   return (
-    <div className="student-dashboard">
+    <div className="role-dashboard">
       <div className="dashboard-header">
         <div className="header-content">
           <div className="avatar">
@@ -109,7 +109,7 @@ const StudentDashboard = () => {
           <div className="header-text">
             <p className="greeting">Hello,</p>
             <h1 className="dashboard-title">
-              <span className="student-name">
+              <span className="role-name">
                 {student?.username ?? "Student"}
               </span>
             </h1>

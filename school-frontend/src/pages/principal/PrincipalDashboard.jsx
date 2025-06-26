@@ -85,7 +85,7 @@ const PrincipalDashboard = () => {
     );
 
   return (
-    <div className="student-dashboard">
+    <div className="role-dashboard">
       <div className="dashboard-header">
         <div className="header-content">
           <div className="avatar">P</div>

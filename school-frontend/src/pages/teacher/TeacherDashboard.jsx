@@ -101,7 +101,7 @@ const TeacherDashboard = () => {
   const subjects = Array.isArray(teacher?.subjects) ? teacher.subjects : [];
 
   return (
-    <div className="student-dashboard">
+    <div className="role-dashboard">
       <div className="dashboard-header">
         <div className="header-content">
           <div className="avatar">
@@ -110,7 +110,7 @@ const TeacherDashboard = () => {
           <div className="header-text">
             <p className="greeting">Welcome,</p>
             <h1 className="dashboard-title">
-              <span className="student-name">
+              <span className="role-name">
                 {teacher?.username ?? "Teacher"}
               </span>
             </h1>
