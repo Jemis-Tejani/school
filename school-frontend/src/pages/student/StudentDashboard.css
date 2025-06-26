@@ -18,6 +18,8 @@
 .loading-text {
   font-style: italic;
   color: #777;
+  text-align: center;
+  margin-top: 2rem;
 }
 
 .error-text {
@@ -25,7 +27,9 @@
   background: #f9ebea;
   padding: 12px;
   border-radius: 6px;
-  margin-bottom: 1rem;
+  text-align: center;
+  max-width: 600px;
+  margin: 2rem auto;
 }
 
 .info-section {
@@ -33,13 +37,13 @@
   background: #f4f8fb;
   padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .info-section h2 {
   font-size: 1.2rem;
-  margin-bottom: 0.75rem;
   color: #34495e;
+  margin-bottom: 0.75rem;
 }
 
 .info-section p,
@@ -49,5 +53,5 @@
 }
 
 .info-section ul {
-  padding-left: 1rem;
+  padding-left: 1.2rem;
 }

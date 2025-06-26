@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 // src/pages/StudentDashboard.jsx
 import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
@@ -18,7 +17,7 @@ const StudentDashboard = () => {
         setStudent(studentRes?.data); // Data is in studentRes.data
       } catch (err) {
         console.error("Error fetching student:", err);
-        setError("🚫 Failed to load student data.");
+        setError("Failed to load student data.");
       } finally {
         setLoading(false);
       }
@@ -34,14 +33,13 @@ const StudentDashboard = () => {
 
   return (
     <div className="student-container">
-      {/* Use student.username instead of undefined 'name' variable */}
       <h1 className="student-heading">
         🎓 Welcome, {student?.username ?? "-"}
       </h1>
       <p className="student-subtext">Here's your academic info:</p>
 
       <div className="info-section">
-        <h2>👤 Profile</h2>
+        <h2>👤 {student?.username ?? "-"}</h2>
         {/* Access email directly from student object */}
         <p>
           <strong>Email:</strong> {student.email}

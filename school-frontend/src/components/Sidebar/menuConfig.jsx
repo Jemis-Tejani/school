@@ -47,7 +47,7 @@ export const principalMenu = [
   {
     id: 1,
     label: "Dashboard",
-    path: "/admin-dashboard",
+    path: "/principal-dashboard",
     icon: <Home size={18} />,
   },
   {

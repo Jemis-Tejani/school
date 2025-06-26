@@ -77,7 +77,7 @@ const Login = () => {
           navigate("/teacher-dashboard");
           break;
         case "principal":
-          navigate("/admin-dashboard");
+          navigate("/principal-dashboard");
           break;
         default:
           setError("Unknown role assigned to user.");
