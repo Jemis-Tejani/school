@@ -5,7 +5,7 @@ import axios from "../../api/axios";
 import "./StudentDashboard.css";
 
 const StudentDashboard = () => {
-  const [student, setStudent] = useState(null); // Initialize as null
+  const [student, setStudent] = useState([]); // Initialize as null
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -15,7 +15,7 @@ const StudentDashboard = () => {
         const studentRes = await axios.get(
           `http://localhost:1337/api/users/me`
         );
-        setStudent(studentRes.data || null); // Data is in studentRes.data
+        setStudent(studentRes?.data); // Data is in studentRes.data
       } catch (err) {
         console.error("Error fetching student:", err);
         setError("🚫 Failed to load student data.");
@@ -35,7 +35,9 @@ const StudentDashboard = () => {
   return (
     <div className="student-container">
       {/* Use student.username instead of undefined 'name' variable */}
-      <h1 className="student-heading">🎓 Welcome, {student.username}!</h1>
+      <h1 className="student-heading">
+        🎓 Welcome, {student?.username ?? "-"}
+      </h1>
       <p className="student-subtext">Here's your academic info:</p>
 
       <div className="info-section">
