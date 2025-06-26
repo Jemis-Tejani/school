@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
-import "./StudentDashboard.css";
 
 const InfoCard = ({ title, icon, children }) => (
   <div className="info-card">
@@ -147,15 +146,15 @@ const StudentDashboard = () => {
           <InfoCard title="Account Details" icon="📝">
             <div className="account-details">
               <div className="detail-item">
-                <span className="detail-label">Account Created:</span>
-                <span className="detail-value">
-                  {new Date(student?.createdAt).toLocaleDateString()}
-                </span>
-              </div>
-              <div className="detail-item">
                 <span className="detail-label">Last Updated:</span>
                 <span className="detail-value">
                   {new Date(student?.updatedAt).toLocaleDateString()}
+                </span>
+              </div>
+              <div className="detail-item">
+                <span className="detail-label">Account Created:</span>
+                <span className="detail-value">
+                  {new Date(student?.createdAt).toLocaleDateString()}
                 </span>
               </div>
               <div className="info-note">

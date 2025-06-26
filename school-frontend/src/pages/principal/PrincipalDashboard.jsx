@@ -1,36 +1,39 @@
-// src/pages/PrincipalDashboard.jsx
 import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
-import "./PrincipalDashboard.css";
 
 const InfoCard = ({ title, icon, count, children }) => (
   <div className="info-card">
-    <h3 className="info-title">
-      {icon} {title} ({count})
-    </h3>
-    {children}
+    <div className="card-header">
+      <div className="card-icon">{icon}</div>
+      <h3 className="card-title">
+        {title} ({count})
+      </h3>
+    </div>
+    <div className="card-content">{children}</div>
   </div>
 );
 
 const Table = ({ headers, rows }) => (
-  <table className="info-table">
-    <thead>
-      <tr>
-        {headers.map((h, idx) => (
-          <th key={idx}>{h}</th>
-        ))}
-      </tr>
-    </thead>
-    <tbody>
-      {rows.map((row, idx) => (
-        <tr key={idx}>
-          {row.map((cell, cIdx) => (
-            <td key={cIdx}>{cell}</td>
+  <div className="table-container">
+    <table className="info-table">
+      <thead>
+        <tr>
+          {headers.map((h, idx) => (
+            <th key={idx}>{h}</th>
           ))}
         </tr>
-      ))}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {rows.map((row, idx) => (
+          <tr key={idx}>
+            {row.map((cell, cIdx) => (
+              <td key={cIdx}>{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
 );
 
 const PrincipalDashboard = () => {
@@ -67,80 +70,105 @@ const PrincipalDashboard = () => {
   }, []);
 
   if (loading)
-    return <p className="loading-text">⏳ Loading principal dashboard...</p>;
-  if (error) return <p className="error-text">{error}</p>;
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p className="loading-text">⏳ Loading principal dashboard...</p>
+      </div>
+    );
+  if (error)
+    return (
+      <div className="error-container">
+        <div className="error-icon">❌</div>
+        <p className="error-text">{error}</p>
+      </div>
+    );
 
   return (
-    <div className="principal-container">
-      <h1 className="principal-heading">🏫 Welcome, Principal!</h1>
-      <p className="principal-subtext">Here’s your school summary:</p>
+    <div className="student-dashboard">
+      <div className="dashboard-header">
+        <div className="header-content">
+          <div className="avatar">P</div>
+          <div className="header-text">
+            <p className="greeting">Welcome</p>
+            <h1 className="dashboard-title">Principal</h1>
+            <p className="dashboard-subtitle">Here’s your school summary:</p>
+          </div>
+        </div>
+      </div>
 
-      <InfoCard title="Teachers" icon="👩‍🏫" count={teachers.length}>
-        <Table
-          headers={["Name", "Email", "Subjects"]}
-          rows={teachers.map((t) => [
-            t?.teacher_name ?? "Unnamed",
-            t?.teacher_email ?? "No Email",
-            Array.isArray(t.subjects) && t.subjects.length > 0
-              ? t.subjects.map((s) => s.subject_name).join(", ")
-              : "Not allotted",
-          ])}
-        />
-      </InfoCard>
+      <div className="dashboard-content">
+        <div className="main-grid">
+          <InfoCard title="Teachers" icon="👩‍🏫" count={teachers.length}>
+            <Table
+              headers={["Name", "Email", "Subjects"]}
+              rows={teachers.map((t) => [
+                t?.teacher_name ?? "Unnamed",
+                t?.teacher_email ?? "No Email",
+                Array.isArray(t.subjects) && t.subjects.length > 0
+                  ? t.subjects.map((s) => s.subject_name).join(", ")
+                  : "Not allotted",
+              ])}
+            />
+          </InfoCard>
 
-      <InfoCard title="Students" icon="👨‍🎓" count={students.length}>
-        <Table
-          headers={[
-            "Name",
-            "Email",
-            "Roll No",
-            "Standard",
-            "Division",
-            "Subjects",
-          ]}
-          rows={students.map((s) => [
-            s?.student_name ?? "Unnamed",
-            s?.student_email ?? s?.users_permissions_user?.email ?? "No Email",
-            s?.student_roll_number ?? "-",
-            s?.standard?.standard_name ?? "-",
-            s?.division?.division_name ?? "-",
-            Array.isArray(s.subjects) && s.subjects.length > 0
-              ? s.subjects.map((sub) => sub.subject_name).join(", ")
-              : "Not allotted",
-          ])}
-        />
-      </InfoCard>
+          <InfoCard title="Students" icon="👨‍🎓" count={students.length}>
+            <Table
+              headers={[
+                "Name",
+                "Email",
+                "Roll No",
+                "Standard",
+                "Division",
+                "Subjects",
+              ]}
+              rows={students.map((s) => [
+                s?.student_name ?? "Unnamed",
+                s?.student_email ??
+                  s?.users_permissions_user?.email ??
+                  "No Email",
+                s?.student_roll_number ?? "-",
+                s?.standard?.standard_name ?? "-",
+                s?.division?.division_name ?? "-",
+                Array.isArray(s.subjects) && s.subjects.length > 0
+                  ? s.subjects.map((sub) => sub.subject_name).join(", ")
+                  : "Not allotted",
+              ])}
+            />
+          </InfoCard>
 
-      <InfoCard title="Subjects" icon="📘" count={subjects.length}>
-        <Table
-          headers={["Subject", "Teacher", "Standards", "Students"]}
-          rows={subjects.map((sub) => [
-            sub.subject_name ?? "Untitled",
-            sub.teacher?.teacher_name ?? "Unknown",
-            Array.isArray(sub.standards) && sub.standards.length > 0
-              ? sub.standards.map((std) => std.standard_name).join(", ")
-              : "Not assigned",
-            Array.isArray(sub.students) && sub.students.length > 0
-              ? sub.students.map((s) => s.student_name).join(", ")
-              : "No students",
-          ])}
-        />
-      </InfoCard>
+          <InfoCard title="Subjects" icon="📘" count={subjects.length}>
+            <Table
+              headers={["Subject", "Teacher", "Standards", "Students"]}
+              rows={subjects.map((sub) => [
+                sub.subject_name ?? "Untitled",
+                sub.teacher?.teacher_name ?? "Unknown",
+                Array.isArray(sub.standards) && sub.standards.length > 0
+                  ? sub.standards.map((std) => std.standard_name).join(", ")
+                  : "Not assigned",
+                Array.isArray(sub.students) && sub.students.length > 0
+                  ? sub.students.map((s) => s.student_name).join(", ")
+                  : "No students",
+              ])}
+            />
+          </InfoCard>
 
-      <InfoCard title="Divisions" icon="🏫" count={divisions.length}>
-        <Table
-          headers={["Division", "Standards", "Students"]}
-          rows={divisions.map((d) => [
-            d.division_name ?? "Unnamed",
-            Array.isArray(d.standards) && d.standards.length > 0
-              ? d.standards.map((std) => std.standard_name).join(", ")
-              : "Not assigned",
-            Array.isArray(d.students) && d.students.length > 0
-              ? d.students.map((s) => s.student_name).join(", ")
-              : "No students",
-          ])}
-        />
-      </InfoCard>
+          <InfoCard title="Divisions" icon="🏫" count={divisions.length}>
+            <Table
+              headers={["Division", "Standards", "Students"]}
+              rows={divisions.map((d) => [
+                d.division_name ?? "Unnamed",
+                Array.isArray(d.standards) && d.standards.length > 0
+                  ? d.standards.map((std) => std.standard_name).join(", ")
+                  : "Not assigned",
+                Array.isArray(d.students) && d.students.length > 0
+                  ? d.students.map((s) => s.student_name).join(", ")
+                  : "No students",
+              ])}
+            />
+          </InfoCard>
+        </div>
+      </div>
     </div>
   );
 };
