@@ -73,7 +73,6 @@ const PrincipalDashboard = () => {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
-        <p className="loading-text">⏳ Loading principal dashboard...</p>
       </div>
     );
   if (error)
